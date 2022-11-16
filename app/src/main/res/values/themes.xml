@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/material_dynamic_secondary80</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/Prussian_Blue</item>
+        <item name="android:statusBarColor">@color/material_dynamic_primary10</item>
         <!-- Customize your theme here. -->
         <item name="android:background">@color/Prussian_Blue</item>
 
