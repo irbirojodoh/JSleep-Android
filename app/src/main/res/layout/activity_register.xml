@@ -12,8 +12,8 @@
         android:layout_width="301dp"
         android:layout_height="133dp"
         android:fontFamily="@font/red_hat_display"
-        android:text="Enter your cridentials"
         android:gravity="center"
+        android:text="Enter your cridentials"
         android:textAlignment="center"
         android:textColor="#f4f4f4"
         android:textSize="40sp"
@@ -26,32 +26,38 @@
 
     <EditText
         android:id="@+id/registerEmailInput"
-        android:layout_width="209dp"
-        android:layout_height="41dp"
+        android:layout_width="217dp"
+        android:layout_height="44dp"
         android:backgroundTint="#F4F4F4"
         android:ems="10"
         android:fontFamily="@font/red_hat_display"
+        android:hint="E-mail"
         android:inputType="textEmailAddress"
-        android:text="E-mail"
         android:textColor="@color/Honeydew"
+        android:textColorHint="@color/Honeydew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5
+"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.527" />
+        app:layout_constraintVertical_bias="0.525" />
 
     <EditText
         android:id="@+id/loginPagePassword"
-        android:layout_width="209dp"
-        android:layout_height="39dp"
+        android:layout_width="217dp"
+        android:layout_height="44dp"
         android:backgroundTint="#F4F4F4"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Password"
+        android:hint="Password"
+        android:fontFamily="@font/red_hat_display"
         android:textColor="@color/Honeydew"
+        android:textColorHint="@color/Honeydew"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.604" />
@@ -63,15 +69,16 @@
         android:backgroundTint="#F4F4F4"
         android:ems="10"
         android:fontFamily="@font/red_hat_display"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:text="Name"
         android:textColor="@color/Honeydew"
+        android:textColorHint="@color/Honeydew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.441" />
 
     <Button
         android:id="@+id/loginPageLoginButton"
@@ -84,7 +91,7 @@
         android:background="@drawable/button_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.747" />

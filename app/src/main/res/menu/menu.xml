@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_button"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Search Button"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="collapseActionView|always" />
+
+    <item
+        android:id="@+id/acc_icon"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Account Icon"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="collapseActionView|always" />
+        />
+
+    <item
+        android:id="@+id/box_add_icon"
+        android:icon="@drawable/ic_baseline_add_box_24"
+        android:title="box plus Icon"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="collapseActionView|always" />
+    />
+</menu>

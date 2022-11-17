@@ -2,6 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners  android:radius="20dp"/>
     <solid android:color="@color/Imperial_Red"/>
+    <item android:state_pressed="true" android:drawable="@color/Imperial_Red"/>
+    <item android:state_enabled="true" android:drawable="@color/Imperial_Red"/>
+    <item android:drawable="@color/Prussian_Blue"/>
 
 </shape>
 

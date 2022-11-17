@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutMe">
+
+
+    <TextView
+        android:id="@+id/emailDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:fontFamily="@font/red_hat_display"
+
+        android:gravity="center"
+        android:inputType="textEmailAddress"
+        android:text="gmail@rijal.com"
+        android:textColor="@color/Honeydew"
+        app:layout_constraintBottom_toTopOf="@+id/hello"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/judulAboutMe"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/judulAboutMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-500dp"
+        android:fontFamily="@font/yellowtail"
+        android:text="Account Details"
+        android:textColor="@color/Honeydew"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.464" />
+
+    <Button
+        android:id="@+id/topup"
+        android:layout_width="106dp"
+        android:layout_height="59dp"
+        android:background="@drawable/button_rounded"
+        android:fontFamily="@font/red_hat_display"
+
+        android:text="top-up"
+        android:textColor="@color/Honeydew"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <TextView
+        android:id="@+id/hello"
+        android:layout_width="124dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="98dp"
+        android:layout_marginBottom="11dp"
+        android:fontFamily="@font/yellowtail"
+        android:gravity="center"
+        android:text="Hello"
+        android:textColor="@color/Honeydew"
+
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/nickname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/judulAboutMe"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="252dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/red_hat_display"
+        android:gravity="center"
+        android:text="Your balance is"
+        android:textColor="@color/Honeydew"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nickname"
+        app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/balance"
+        android:layout_width="197dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:fontFamily="@font/red_hat_display"
+        android:gravity="center"
+        android:text="69.420"
+        android:textColor="@color/Honeydew"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/nickname"
+        android:layout_width="167dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="176dp"
+
+        android:ems="10"
+        android:fontFamily="@font/yellowtail"
+        android:gravity="center"
+        android:text="Rijal"
+
+        android:textColor="@color/Honeydew"
+        android:textSize="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/judulAboutMe" />
+
+    <EditText
+        android:id="@+id/topupAmount"
+        android:layout_width="212dp"
+        android:layout_height="66dp"
+        android:backgroundTint="@color/Honeydew"
+        android:ems="10"
+        android:fontFamily="@font/red_hat_display"
+
+        android:hint="Enter amount"
+        android:inputType="number"
+
+        android:textColor="@color/Honeydew"
+        android:textColorHint="@color/Honeydew"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.873" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
