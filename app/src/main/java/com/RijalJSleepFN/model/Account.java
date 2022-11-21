@@ -1,6 +1,12 @@
 package com.RijalJSleepFN.model;
 
+import android.widget.Toast;
+
 import com.RijalJSleepFN.model.Serializable;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Account extends Serializable {
     public String name;
@@ -46,6 +52,8 @@ public class Account extends Serializable {
                 ", renter=" + renter +
                 '}';
     }
+
+
 }
 
 

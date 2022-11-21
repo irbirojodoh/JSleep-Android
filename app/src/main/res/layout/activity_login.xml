@@ -60,35 +60,35 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/registerEmailInput"
+        android:id="@+id/loginEmailInput"
         android:layout_width="314dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
+        android:autofillHints=""
         android:backgroundTint="#F4F4F4"
         android:ems="10"
         android:fontFamily="@font/red_hat_display"
-        android:inputType="textEmailAddress"
         android:hint="E-mail"
-        android:textColorHint="@color/Honeydew"
+        android:inputType="textEmailAddress"
         android:textColor="@color/Honeydew"
+        android:textColorHint="@color/Honeydew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565"
-        android:autofillHints="" />
-
+        app:layout_constraintVertical_bias="0.565" />
 
 
     <EditText
         android:id="@+id/loginPagePassword"
         android:layout_width="314dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
+        android:autofillHints=""
         android:backgroundTint="#F4F4F4"
-        android:fontFamily="@font/red_hat_display"
         android:ems="10"
-        android:inputType="textPassword"
+        android:fontFamily="@font/red_hat_display"
         android:hint="Password"
+        android:inputType="textPassword"
         android:textColor="@color/Honeydew"
         android:textColorHint="@color/Honeydew"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,8 +96,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.642"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.642" />
 
     <Button
         android:id="@+id/loginRegisterButton"
