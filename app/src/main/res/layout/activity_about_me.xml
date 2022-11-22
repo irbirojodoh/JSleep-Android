@@ -17,7 +17,6 @@
 
         android:gravity="center"
         android:inputType="textEmailAddress"
-        android:text="gmail@rijal.com"
         android:textColor="@color/Honeydew"
         app:layout_constraintBottom_toTopOf="@+id/hello"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +100,6 @@
         android:ems="10"
         android:fontFamily="@font/red_hat_display"
         android:gravity="center"
-        android:text="69.420"
         android:textColor="@color/Honeydew"
         android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,7 +117,6 @@
         android:ems="10"
         android:fontFamily="@font/yellowtail"
         android:gravity="center"
-        android:text="Rijal"
 
         android:textColor="@color/Honeydew"
         android:textSize="50dp"

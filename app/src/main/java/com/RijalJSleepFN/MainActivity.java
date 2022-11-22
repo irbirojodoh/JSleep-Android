@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     String name;
     static ArrayList<Room> roomList = new ArrayList<Room>();
 
+    public static Account savedAccount;
+
 
 
 
