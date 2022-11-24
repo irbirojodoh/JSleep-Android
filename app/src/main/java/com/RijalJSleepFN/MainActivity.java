@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Gson gson = new Gson();
        // File file = new File(getFilesDir(), "randomRoomList.json");
         MenuItem item;
@@ -81,11 +83,26 @@ public class MainActivity extends AppCompatActivity {
                 Intent move = new Intent(MainActivity.this, AboutMe.class);
                 startActivity(move);
                 return true;
+            case R.id.box_add_icon:
+                Intent move2 = new Intent(MainActivity.this, CreateRoomActivity.class);
+                startActivity(move2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem register = menu.findItem(R.id.box_add_icon);
+        if(savedAccount.renter == null){
+            register.setVisible(false);
+        }
+        else {
+            register.setVisible(true);
+        }
+        return true;
+    }
 
 }
 

@@ -5,6 +5,9 @@ plugins {
 android {
     namespace 'com.RijalJSleepFN'
     compileSdk 32
+    buildFeatures {
+        dataBinding true
+    }
 
     defaultConfig {
         applicationId "com.RijalJSleepFN"

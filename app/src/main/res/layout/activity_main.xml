@@ -84,7 +84,7 @@
         android:id="@+id/listViewMain"
         android:layout_width="289dp"
         android:layout_height="577dp"
-        android:background="@color/Imperial_Red"
+
         android:cacheColorHint="#FFF1F1"
         android:textColor="@color/Honeydew"
         app:layout_constraintBottom_toBottomOf="parent"
