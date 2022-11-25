@@ -163,10 +163,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvNoRenter"
-        android:visibility="gone"
         android:layout_width="369dp"
         android:layout_height="399dp"
         android:layout_margin="10dp"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/Prussian_Blue"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
@@ -177,7 +177,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="visible">
 
 
         <Button
@@ -206,10 +207,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvInputRenter"
-        android:visibility="gone"
         android:layout_width="369dp"
         android:layout_height="399dp"
         android:layout_margin="10dp"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/Prussian_Blue"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
@@ -220,7 +221,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="333dp"
@@ -234,11 +236,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:backgroundTint="@color/Honeydew"
                 android:ems="10"
                 android:fontFamily="@font/red_hat_display"
                 android:hint="Name"
                 android:inputType="textPersonName"
-                android:backgroundTint="@color/Honeydew"
                 android:textColor="@color/Honeydew"
                 android:textColorHint="@color/Honeydew"
                 android:textSize="20dp" />
@@ -248,24 +250,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:backgroundTint="@color/Honeydew"
                 android:ems="10"
                 android:fontFamily="@font/red_hat_display"
                 android:hint="Address"
                 android:inputType="textAutoCorrect"
-                android:backgroundTint="@color/Honeydew"
                 android:textColor="@color/Honeydew"
                 android:textColorHint="@color/Honeydew"
                 android:textSize="20dp" />
+
             <EditText
                 android:id="@+id/rtrPhoneInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:backgroundTint="@color/Honeydew"
                 android:ems="10"
                 android:fontFamily="@font/red_hat_display"
                 android:hint="Phone"
                 android:inputType="text|number"
-                android:backgroundTint="@color/Honeydew"
                 android:textColor="@color/Honeydew"
                 android:textColorHint="@color/Honeydew"
                 android:textSize="20dp" />
@@ -273,8 +276,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/cancelRenter"
@@ -306,15 +309,10 @@
             </LinearLayout>
 
 
-
-
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
-
-
-
 
 
     <androidx.cardview.widget.CardView
@@ -332,7 +330,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        tools:visibility="invisible">
 
 
         <LinearLayout
@@ -351,11 +350,11 @@
                     android:id="@+id/rtrName"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/red_hat_display"
                     android:gravity="center"
                     android:text="Name"
                     android:textColor="@color/Honeydew"
-                    android:layout_marginRight="20dp"
-                    android:fontFamily="@font/red_hat_display"
                     android:textSize="20dp" />
 
                 <TextView
@@ -385,11 +384,11 @@
                     android:id="@+id/rtrAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/red_hat_display"
                     android:gravity="center"
                     android:text="Address"
                     android:textColor="@color/Honeydew"
-                    android:layout_marginRight="20dp"
-                    android:fontFamily="@font/red_hat_display"
                     android:textSize="20dp" />
 
                 <TextView
@@ -410,8 +409,8 @@
             <LinearLayout
                 android:layout_width="313dp"
                 android:layout_height="76dp"
-                android:layout_marginTop="30dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -419,11 +418,11 @@
                     android:id="@+id/rtrPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/red_hat_display"
                     android:gravity="center"
                     android:text="Phone"
                     android:textColor="@color/Honeydew"
-                    android:layout_marginRight="20dp"
-                    android:fontFamily="@font/red_hat_display"
                     android:textSize="20dp" />
 
                 <TextView
@@ -442,17 +441,7 @@
             </LinearLayout>
 
 
-
-
-
-
-
-
         </LinearLayout>
-
-
-
-
 
 
     </androidx.cardview.widget.CardView>

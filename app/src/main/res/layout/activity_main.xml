@@ -60,12 +60,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.913" />
 
-    <EditText
+    <TextView
         android:id="@+id/pageIndicator"
         android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/Honeydew"
+
         android:ems="10"
         android:fontFamily="@font/red_hat_display"
         android:gravity="center"
@@ -84,8 +84,7 @@
         android:id="@+id/listViewMain"
         android:layout_width="289dp"
         android:layout_height="577dp"
-
-        android:cacheColorHint="#FFF1F1"
+        android:background="@color/Powder_Blue"
         android:textColor="@color/Honeydew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
