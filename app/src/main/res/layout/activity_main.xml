@@ -82,16 +82,17 @@
 
     <ListView
         android:id="@+id/listViewMain"
-        android:layout_width="289dp"
-        android:layout_height="577dp"
-        android:background="@color/Powder_Blue"
+        android:layout_width="346dp"
+        android:layout_height="590dp"
+
         android:textColor="@color/Honeydew"
+
+        android:backgroundTint="@color/Honeydew"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.334" />
+        app:layout_constraintVertical_bias="0.138" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

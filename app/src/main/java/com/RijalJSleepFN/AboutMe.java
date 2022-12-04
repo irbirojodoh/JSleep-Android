@@ -1,5 +1,7 @@
 package com.RijalJSleepFN;
 
+import static java.lang.String.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -24,8 +26,8 @@ import retrofit2.Response;
 
 public class AboutMe extends AppCompatActivity {
     TextView name, email, balance;
-    EditText renterName, renterAddress, renterPhone;
-    Button regRenter, reg, cancel;
+    EditText renterName, renterAddress, renterPhone, topupInput;
+    Button regRenter, reg, cancel, topupSubmit;
     CardView noRenter, inputRenter, yesRenter;
     TextView renterNameText, renterAddressText, renterPhoneText, renterNameVar, renterAddressVar, renterPhoneVar;
     Context mContext;
@@ -47,7 +49,7 @@ public class AboutMe extends AppCompatActivity {
         balance = findViewById(R.id.balance);
         name.setText(MainActivity.savedAccount.name);
         email.setText(MainActivity.savedAccount.email);
-        balance.setText(String.valueOf(MainActivity.savedAccount.balance));
+        balance.setText(String.format("%.0f", MainActivity.savedAccount.balance));
 
         //Belom ada renter
         noRenter = findViewById(R.id.cvNoRenter);
@@ -69,6 +71,13 @@ public class AboutMe extends AppCompatActivity {
         renterNameVar = findViewById(R.id.rtrNameVar);
         renterAddressVar = findViewById(R.id.rtrAddressVar);
         renterPhoneVar = findViewById(R.id.rtrPhoneVar);
+
+
+        //Untuk topup
+        topupInput = findViewById(R.id.topupAmount);
+        topupSubmit = findViewById(R.id.isiUlang);
+
+
 
 
         if (MainActivity.savedAccount.renter == null) {
@@ -110,6 +119,8 @@ public class AboutMe extends AppCompatActivity {
 
                 }
             });
+
+
         }
         else {
             noRenter.setVisibility(CardView.GONE);
@@ -119,6 +130,18 @@ public class AboutMe extends AppCompatActivity {
             renterAddressVar.setText(MainActivity.savedAccount.renter.address);
             renterPhoneVar.setText(MainActivity.savedAccount.renter.phoneNumber);
         }
+
+        topupSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value= topupInput.getText().toString();
+
+                Integer topupVal = new Integer(topupInput.getText().toString());
+
+                int finalValue= topupVal.intValue();
+                Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
+            }
+        });
     }
 
     protected Renter requestRenter(int id, String uname, String addr, String phone ) throws NullPointerException {
@@ -146,6 +169,34 @@ public class AboutMe extends AppCompatActivity {
         });
         return null;
     }
+
+    protected Boolean requestTopUp(int id, int balance ){
+        System.out.println("Id: " + id);
+        System.out.println("TopUp: " + balance);
+        mApiService.topUp(id,balance).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.isSuccessful()){
+                    Boolean topUpResult = response.body();
+                    System.out.println("TOPUP SUCCESSFUL!!") ;
+                    MainActivity.savedAccount.balance += balance;
+                    Toast.makeText(mContext, "Top Up Successful", Toast.LENGTH_SHORT).show();
+                    Intent move = new Intent(AboutMe.this, AboutMe.class);
+                    startActivity(move);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                System.out.println("TOPUP ERROR!!");
+                System.out.println(t.toString());
+                Toast.makeText(mContext,"Top Up Failed",Toast.LENGTH_SHORT).show();
+            }
+        });
+        return null;
+    }
+
+
 
 
 }

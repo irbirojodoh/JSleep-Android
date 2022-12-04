@@ -15,6 +15,17 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
+        <LinearLayout
+            android:layout_width="392dp"
+            android:layout_height="1300dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="21dp">
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvCreateRoom"
@@ -236,6 +247,7 @@
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/red_hat_display"
                         android:text="AC"
+                        android:clickable="false"
                         android:textColor="@color/Honeydew"
                         android:textSize="15dp" />
 
@@ -247,6 +259,7 @@
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/red_hat_display"
                         android:text="Refrigerator"
+                        android:clickable="false"
                         android:textColor="@color/Honeydew"
                         android:textSize="15dp" />
 
@@ -258,6 +271,7 @@
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/red_hat_display"
                         android:text="WiFi"
+                        android:clickable="false"
                         android:textColor="@color/Honeydew"
                         android:textSize="15dp" />
 
@@ -278,6 +292,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="20dp"
+                        android:clickable="false"
                         android:fontFamily="@font/red_hat_display"
                         android:text="Bathtub"
                         android:textColor="@color/Honeydew"
@@ -289,6 +304,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="20dp"
+                        android:clickable="false"
                         android:fontFamily="@font/red_hat_display"
                         android:text="Balcony"
                         android:textColor="@color/Honeydew"
@@ -300,6 +316,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="20dp"
+                        android:clickable="false"
                         android:fontFamily="@font/red_hat_display"
                         android:text="Restaurant"
                         android:textColor="@color/Honeydew"
@@ -321,6 +338,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:clickable="false"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/red_hat_display"
                         android:text="Swimming Pool"
@@ -333,6 +351,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:clickable="false"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/red_hat_display"
                         android:text="Fitness Center"
@@ -343,14 +362,34 @@
                 </LinearLayout>
 
 
+
             </LinearLayout>
+
+
 
 
 
 
         </androidx.cardview.widget.CardView>
 
+            <Button
+                android:id="@+id/order"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button_rounded"
+                android:enabled="true"
+                android:fontFamily="@font/red_hat_display"
+                android:text="order"
+                android:textColor="@color/Honeydew" />
+
+        </LinearLayout>
+
+
+
+
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

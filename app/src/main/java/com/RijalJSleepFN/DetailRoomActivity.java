@@ -2,7 +2,10 @@ package com.RijalJSleepFN;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -14,6 +17,7 @@ public class DetailRoomActivity extends AppCompatActivity {
 
     TextView roomName, roomPrice, roomSize, roomAddress, roomBedtype;
     CheckBox ac, refrig, wifi, bathub, balcony, restaurant, pool, fitness;
+    Button order;
 
     public static Room tempRoom;
 
@@ -27,6 +31,8 @@ public class DetailRoomActivity extends AppCompatActivity {
         roomSize = findViewById(R.id.roomSizeVar);
         roomAddress = findViewById(R.id.roomAddressVar);
         roomBedtype = findViewById(R.id.roomBedTypeVar);
+
+        order = findViewById(R.id.order);
 
         ac = findViewById(R.id.ac);
         refrig = findViewById(R.id.refrigerator);
@@ -42,6 +48,16 @@ public class DetailRoomActivity extends AppCompatActivity {
         roomSize.setText(String.valueOf(tempRoom.size));
         roomAddress.setText(tempRoom.address);
         roomBedtype.setText(tempRoom.bedType.toString());
+
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent move = new Intent(DetailRoomActivity.this, PaymentActivity.class);
+                startActivity(move);
+            }
+        });
+
+
 
         for (int i = 0; i < tempRoom.facility.size(); i++) {
             if (tempRoom.facility.get(i).equals(Facility.AC )) {
@@ -62,6 +78,11 @@ public class DetailRoomActivity extends AppCompatActivity {
                 fitness.setChecked(true);
             }
         }
+
+
+
+
+
 
 
 

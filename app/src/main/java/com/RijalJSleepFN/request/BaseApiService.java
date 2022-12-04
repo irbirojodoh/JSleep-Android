@@ -30,6 +30,14 @@ public interface BaseApiService {
     @GET("room/getAllRoom")
     Call<List<Room>> getAllRoom(@Query("page") int page, @Query("pageSize") int pageSize);
 
+    @POST("account/{id}/topup")
+    Call<Boolean> topUp(@Path("id") int id, @Query("amount") int amount);
+
+    @POST("payment/create")
+    Call<Payment> payment(@Query("buyerId") int buyerId, @Query("renterId") int renterId, @Query("roomId") int roomId, @Query("from") String from, @Query("to") String to);
+
+
+
 //    @GET("room/{id}")
 //    Call<Room> getRoom (@Path("id") int id);
 

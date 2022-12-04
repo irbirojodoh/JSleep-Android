@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentActivity">
+
+    <LinearLayout
+        android:layout_width="392dp"
+        android:layout_height="1300dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="21dp">
+
+
+
+
+        <TextView
+            android:id="@+id/ordertitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/yellowtail"
+            android:text="Order Room"
+            android:textColor="@color/Honeydew"
+            android:textSize="50dp"/>
+
+        <TextView
+            android:id="@+id/roomName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:editable="false"
+            android:ems="10"
+            android:fontFamily="@font/red_hat_display"
+            android:gravity="center"
+            android:text = "room name"
+
+            android:inputType="textEmailAddress"
+            android:textColor="@color/Honeydew"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:layout_width="392dp"
+            android:layout_height="67dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/from"
+                android:layout_width="124dp"
+                android:layout_height="67dp"
+                android:layout_gravity="left"
+                android:layout_marginTop="56dp"
+                android:fontFamily="@font/red_hat_display"
+                android:gravity="center_vertical"
+                android:text="From"
+                android:textColor="@color/Honeydew"
+
+                android:textSize="35dp"
+                android:textStyle="bold"
+                 />
+
+
+            <EditText
+                android:id="@+id/fromDate"
+                android:layout_width="248dp"
+                android:layout_height="67dp"
+                android:layout_gravity="right"
+                android:ems="10"
+                android:fontFamily="@font/red_hat_display"
+                android:gravity="center"
+                android:backgroundTint="@color/Honeydew"
+                android:inputType="date"
+                android:hint="yyyy-MM-dd"
+                android:textColor="@color/Honeydew"
+                android:textColorHint="@color/Honeydew"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="392dp"
+            android:layout_height="67dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/to"
+                android:layout_width="124dp"
+                android:layout_height="67dp"
+                android:layout_gravity="left"
+                android:layout_marginTop="56dp"
+                android:fontFamily="@font/red_hat_display"
+                android:gravity="center_vertical"
+                android:text="To"
+                android:textColor="@color/Honeydew"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                 />
+
+
+            <EditText
+                android:id="@+id/toDate"
+                android:layout_width="248dp"
+                android:layout_height="67dp"
+                android:layout_gravity="right"
+                android:ems="10"
+                android:fontFamily="@font/red_hat_display"
+                android:gravity="center"
+                android:backgroundTint="@color/Honeydew"
+                android:inputType="date"
+                android:hint="yyyy-MM-dd"
+                android:textColor="@color/Honeydew"
+                android:textColorHint="@color/Honeydew"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/order"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:enabled="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_rounded"
+            android:fontFamily="@font/red_hat_display"
+            android:text="Order"
+            android:textColor="@color/Honeydew" />
+
+
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

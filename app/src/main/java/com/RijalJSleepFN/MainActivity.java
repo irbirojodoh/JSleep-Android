@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         System.out.println("test");
-        acc = getRoomList(10,10);
+        acc = getRoomList(0,10);
 
 
 
