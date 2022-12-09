@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -60,7 +63,7 @@ public class DetailRoomActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < tempRoom.facility.size(); i++) {
-            if (tempRoom.facility.get(i).equals(Facility.AC )) {
+            if (tempRoom.facility.get(i).equals(Facility.AC)) {
                 ac.setChecked(true);
             } else if (tempRoom.facility.get(i).equals(Facility.Refrigerator)) {
                 refrig.setChecked(true);
@@ -78,13 +81,37 @@ public class DetailRoomActivity extends AppCompatActivity {
                 fitness.setChecked(true);
             }
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.home:
+                Intent move = new Intent(DetailRoomActivity.this, MainActivity.class);
+                startActivity(move);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
-
-
-
-
-
-
-
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem register = menu.findItem(R.id.box_add_icon);
+        MenuItem refresh = menu.findItem(R.id.refresh);
+        MenuItem acc = menu.findItem(R.id.acc_icon);
+        MenuItem box = menu.findItem(R.id.box_add_icon);
+        MenuItem search = menu.findItem(R.id.search_button);
+        search.setVisible(false);
+        register.setVisible(false);
+        refresh.setVisible(false);
+        acc.setVisible(false);
+        box.setVisible(false);
+        return true;
     }
 }

@@ -2,6 +2,8 @@ package com.RijalJSleepFN.model;
 
 
 
+import com.RijalJSleepFN.MainActivity;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.text.*;
@@ -10,7 +12,7 @@ import java.text.*;
 public class Payment extends Invoice{
     public Date to;
     public Date from;
-    private int roomId;
+    public int roomId;
 
     /**overloading constructor*/
     public Payment(Account buyer, Renter renter, int roomId,Date from,Date to){
@@ -81,5 +83,7 @@ public class Payment extends Invoice{
         }
         return false;
     }
+
+
 
 }

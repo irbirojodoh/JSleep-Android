@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="392dp"
-            android:layout_height="1300dp"
+            android:layout_height="2000dp"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
 
@@ -31,6 +31,7 @@
             android:id="@+id/cvCreateRoom"
             android:layout_width="368dp"
             android:layout_height="wrap_content"
+
             android:layout_margin="10dp"
             app:cardBackgroundColor="@color/Prussian_Blue"
             app:cardCornerRadius="20dp"
@@ -47,9 +48,10 @@
 
             <LinearLayout
                 android:layout_width="340dp"
-                android:layout_height="487dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 tools:layout_editor_absoluteX="33dp"
+                android:layout_marginBottom="30dp"
                 tools:layout_editor_absoluteY="120dp">
 
                 <TextView
@@ -144,18 +146,18 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+
                         android:gravity="right"
                         android:orientation="vertical">
 
 
                         <TextView
                             android:id="@+id/roomNameVar"
-                            android:layout_width="wrap_content"
+                            android:layout_width="190dp"
                             android:layout_height="30dp"
-                            android:layout_marginLeft="100dp"
+
                             android:fontFamily="@font/red_hat_display"
-                            android:gravity="center_vertical"
+                            android:gravity="right"
 
                             android:text="Name"
                             android:textColor="@color/Honeydew"
@@ -188,9 +190,9 @@
 
                         <TextView
                             android:id="@+id/roomPriceVar"
-                            android:layout_width="100dp"
+                            android:layout_width="190dp"
                             android:layout_height="30dp"
-                            android:layout_marginLeft="100dp"
+
                             android:fontFamily="@font/red_hat_display"
                             android:gravity="right"
 
@@ -207,10 +209,11 @@
                 <TextView
                     android:id="@+id/roomAddressVar"
                     android:layout_width="300dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/red_hat_display"
-                    android:gravity="center_vertical"
+                    android:gravity="top|left"
+
 
                     android:text="Address"
                     android:textColor="@color/Honeydew"

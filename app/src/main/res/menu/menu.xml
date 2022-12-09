@@ -24,4 +24,17 @@
         app:actionViewClass="android.widget.ImageView"
         app:showAsAction="collapseActionView|always" />
     />
+
+    <item
+        android:id="@+id/refresh"
+        android:icon="@drawable/ic_baseline_refresh_24"
+        android:title="box Icon"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="collapseActionView|always" />
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="box Icon"
+        app:actionViewClass="android.widget.ImageView"
+        app:showAsAction="collapseActionView|always" />
 </menu>

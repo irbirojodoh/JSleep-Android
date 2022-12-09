@@ -1,5 +1,6 @@
 package com.RijalJSleepFN;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -55,6 +56,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(mContext, "Berhasil register", Toast.LENGTH_SHORT).show();
+                    Intent move = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(move);
 
                 }
             }

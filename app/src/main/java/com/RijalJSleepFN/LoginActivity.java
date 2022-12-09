@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent move = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(move);
 
+
                 }
             }
 

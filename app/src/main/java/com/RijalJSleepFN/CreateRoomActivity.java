@@ -3,7 +3,11 @@ package com.RijalJSleepFN;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -130,6 +134,9 @@ public class CreateRoomActivity extends AppCompatActivity {
             public void onResponse(Call<Room> call, Response<Room> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(mContext, "Berhasil buat room", Toast.LENGTH_SHORT).show();
+                    Intent move = new Intent(CreateRoomActivity.this, MainActivity.class);
+                    startActivity(move);
+
 
                 }
             }
@@ -140,5 +147,38 @@ public class CreateRoomActivity extends AppCompatActivity {
             }
         });
         return null;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.home:
+                Intent move = new Intent(CreateRoomActivity.this, MainActivity.class);
+                startActivity(move);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem register = menu.findItem(R.id.box_add_icon);
+        MenuItem refresh = menu.findItem(R.id.refresh);
+        MenuItem acc = menu.findItem(R.id.acc_icon);
+        MenuItem box = menu.findItem(R.id.box_add_icon);
+        MenuItem search = menu.findItem(R.id.search_button);
+        search.setVisible(false);
+        register.setVisible(false);
+        refresh.setVisible(false);
+        acc.setVisible(false);
+        box.setVisible(false);
+        return true;
     }
 }

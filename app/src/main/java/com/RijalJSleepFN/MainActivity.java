@@ -38,23 +38,35 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<Room> roomList = new ArrayList<Room>();
 
     public static Account savedAccount;
+    public static Account savedAccount2;
 
     List<String> nameStr;
+    static List<String> roomName = new ArrayList<>();
     List<Room> temp ;
     List<Room> acc ;
     ListView lv;
     BaseApiService mApiService;
-    Context mContext;
+    static BaseApiService mApiServiceStatic;
+    Context mContext = this;
     Button next, prev;
     int currentPage;
+    boolean count = false;
+    Account empty;
 
+
+    /**
+     * Initializes the activity.
+     *
+     * @param savedInstanceState a bundle containing the state of the activity
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mApiService = UtilsApi.getAPIService();
-        mContext = this;
+        mApiServiceStatic = UtilsApi.getAPIService();
+
         next = findViewById(R.id.nextButton);
         prev = findViewById(R.id.prevButton);
 
@@ -64,9 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         System.out.println("test");
+
         acc = getRoomList(0,10);
-
-
 
 
 
@@ -99,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 currentPage--;
                 try {
                     acc = getRoomList(currentPage-1, 1);  //return null
+
                     Toast.makeText(mContext, "page "+currentPage, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -106,50 +118,26 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-        /*
-        Gson gson = new Gson();
-       // File file = new File(getFilesDir(), "randomRoomList.json");
-        MenuItem item;
-
-        try {
-
-            InputStream filepath = getAssets().open("randomRoomList.json");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(filepath));
-
-            Room[] roomTemp = gson.fromJson(reader, Room[].class);
-            Collections.addAll(roomList, roomTemp);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        ArrayList<String> names = new ArrayList<String>();
-        for (Room room : roomList) {
-            names.add(room.name);
-        }
-        ArrayAdapter<String > arrayAdapter = new ArrayAdapter<String>(
-                MainActivity.this,
-                android.R.layout.simple_list_item_1,
-                names );
-        ListView lv = (ListView) findViewById(R.id.listViewMain);
-        lv.setAdapter(arrayAdapter);
-
-         */
-
     }
-
+    /**
+     * Initializes the options menu for this activity.
+     *
+     * @param menu the options menu to initialize
+     * @return true if the menu was successfully created
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+    /**
+     * Handles menu item selection.
+     *
+     * @param item The selected menu item.
+     *
+     * @return True if the menu item was successfully handled, false otherwise.
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
@@ -161,14 +149,27 @@ public class MainActivity extends AppCompatActivity {
                 Intent move2 = new Intent(MainActivity.this, CreateRoomActivity.class);
                 startActivity(move2);
                 return true;
+            case R.id.refresh:
+                finish();
+                startActivity(getIntent());
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+
+    /**
+
+     This method is called when the options menu is being prepared for display.
+     @param menu The options menu to be prepared
+     @return true if the menu was successfully prepared, false otherwise
+     */
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         MenuItem register = menu.findItem(R.id.box_add_icon);
+        MenuItem home = menu.findItem(R.id.home);
+        home.setVisible(false);
         if(savedAccount.renter == null){
             register.setVisible(false);
         }
@@ -178,6 +179,14 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
+    /**
+
+     This method retrieves a list of rooms from the API and updates the list view with the names of the rooms.
+     @param page The page number to retrieve
+     @param pageSize The number of rooms per page
+     @return null
+     */
     protected List<Room> getRoomList(int page, int pageSize) {
         //System.out.println(pageSize);
         mApiService.getAllRoom(page, pageSize).enqueue(new Callback<List<Room>>() {
@@ -186,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     temp = response.body();
                     nameStr = getName(temp);
+                    roomName.addAll(nameStr);
                     System.out.println("name extracted"+temp.toString());
                     ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1,nameStr);
                     lv = (ListView) findViewById(R.id.listViewMain);
@@ -203,6 +213,43 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+
+    /**
+     This static method retrieves an account with the given ID from the API and updates the savedAccount field.
+     @param id The ID of the account to retrieve
+     @return null
+     */
+    public static Account reloadAccount(int id){
+        mApiServiceStatic.getAccount(id).enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, Response<Account> response) {
+                if (response.isSuccessful()) {
+                     MainActivity.savedAccount = response.body();
+                     MainActivity.savedAccount2 = response.body();
+                    //Toast.makeText(mContext, "getAccount success", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                t.printStackTrace();
+                //Toast.makeText(mContext, "get account failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        try {
+            System.out.println("Saved 2" + savedAccount2.name);
+        }catch(NullPointerException e){
+            System.out.println("NILLL");
+        }
+        return null;
+    }
+
+    /**
+
+     This static method returns a list of strings containing the names of rooms in the given list.
+     @param list The list of rooms
+     @return An ArrayList of strings containing the names of the rooms
+     */
     public static ArrayList<String> getName(List<Room> list) {
         ArrayList<String> ret = new ArrayList<String>();
         int i;
@@ -212,6 +259,15 @@ public class MainActivity extends AppCompatActivity {
         return ret;
     }
 
+
+    /**
+
+     This method is called when an item in the list view is clicked. It starts the DetailRoomActivity and passes the position and id of the clicked item as extra data.
+     @param l The AdapterView where the click happened
+     @param v The view within the AdapterView that was clicked
+     @param position The position of the view in the adapter
+     @param id The row id of the item that was clicked
+     */
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
         Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
         // Then you start a new Activity via Intent
@@ -223,6 +279,15 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("id", id);
         startActivity(intent);
     }
+
+
+
+
+
+
+
+
+
 
 }
 

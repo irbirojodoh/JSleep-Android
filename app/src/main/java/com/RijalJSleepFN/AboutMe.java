@@ -1,6 +1,7 @@
 package com.RijalJSleepFN;
 
 import static java.lang.String.*;
+import java.util.regex.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -8,6 +9,9 @@ import androidx.cardview.widget.CardView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,22 +28,37 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+/**
+ * @author Rijal
+ * @version 1.0
+ * @created 30-Mar-2020 11:00:00 AM
+ *
+ */
+
 public class AboutMe extends AppCompatActivity {
     TextView name, email, balance;
     EditText renterName, renterAddress, renterPhone, topupInput;
-    Button regRenter, reg, cancel, topupSubmit;
+    Button regRenter, reg, cancel, topupSubmit, showBooking;
     CardView noRenter, inputRenter, yesRenter;
     TextView renterNameText, renterAddressText, renterPhoneText, renterNameVar, renterAddressVar, renterPhoneVar;
     Context mContext;
     BaseApiService mApiService;
 
+    String regex = "^.+$";
 
+
+
+    /**
+     This method is called when the AboutMe activity is created. It sets up the views and sets the visibility of the different view groups based on the savedAccount field.
+     @param savedInstanceState The saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
         mApiService= UtilsApi.getAPIService();
         mContext = this;
+
 
 
 
@@ -64,6 +83,7 @@ public class AboutMe extends AppCompatActivity {
         cancel = findViewById(R.id.cancelRenter);
 
         //Sudah ada renter
+        showBooking = findViewById(R.id.showBookings);
         yesRenter = findViewById(R.id.cvYesRenter);
         renterNameText = findViewById(R.id.rtrName);
         renterAddressText = findViewById(R.id.rtrAddress);
@@ -71,6 +91,7 @@ public class AboutMe extends AppCompatActivity {
         renterNameVar = findViewById(R.id.rtrNameVar);
         renterAddressVar = findViewById(R.id.rtrAddressVar);
         renterPhoneVar = findViewById(R.id.rtrPhoneVar);
+
 
 
         //Untuk topup
@@ -112,6 +133,7 @@ public class AboutMe extends AppCompatActivity {
                             noRenter.setVisibility(CardView.VISIBLE);
                             inputRenter.setVisibility(CardView.GONE);
                             yesRenter.setVisibility(CardView.GONE);
+
                         }
                     });
 
@@ -129,22 +151,48 @@ public class AboutMe extends AppCompatActivity {
             renterNameVar.setText(MainActivity.savedAccount.renter.username);
             renterAddressVar.setText(MainActivity.savedAccount.renter.address);
             renterPhoneVar.setText(MainActivity.savedAccount.renter.phoneNumber);
+            showBooking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(AboutMe.this, OrderDetailActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
         topupSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String value= topupInput.getText().toString();
 
-                Integer topupVal = new Integer(topupInput.getText().toString());
+                String value = topupInput.getText().toString();
+                if (value.isEmpty()) {
+                    Toast.makeText(mContext, "Enter top-up amount", Toast.LENGTH_SHORT).show();
+                } else{
+                    Double topupVal = new Double(topupInput.getText().toString());
+                    double finalValue = topupVal.doubleValue();
+                    if (finalValue < 10000) {
+                        Toast.makeText(mContext, "Minimum top-up amount is Rp. 10.000", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
+                    }
 
-                int finalValue= topupVal.intValue();
-                Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
+                }
             }
         });
     }
 
-    protected Renter requestRenter(int id, String uname, String addr, String phone ) throws NullPointerException {
+    /**
+
+     This method sends a request to register a renter with the given ID, username, address, and phone number. It updates the savedAccount field if the request is successful.
+     @param id The ID of the renter
+     @param uname The username of the renter
+     @param addr The address of the renter
+     @param phone The phone number of the renter
+     @return null
+     @throws NullPointerException
+     */
+
+        protected Renter requestRenter(int id, String uname, String addr, String phone ) throws NullPointerException {
         System.out.println("Id: " + id);
         System.out.println("Username: " + uname);
         System.out.println("Address: " + addr);
@@ -156,7 +204,7 @@ public class AboutMe extends AppCompatActivity {
                     Renter renter = response.body();
                     MainActivity.savedAccount.renter = renter;
                     Toast.makeText(mContext, "Berhasil register renter", Toast.LENGTH_SHORT).show();
-                    Intent move = new Intent(AboutMe.this, MainActivity.class);
+                    Intent move = new Intent(AboutMe.this, AboutMe.class);
                     startActivity(move);
 
                 }
@@ -170,7 +218,14 @@ public class AboutMe extends AppCompatActivity {
         return null;
     }
 
-    protected Boolean requestTopUp(int id, int balance ){
+    /**
+
+     This method sends a request to top up the balance of the account with the given ID by the given amount. It updates the savedAccount field if the request is successful.
+     @param id The ID of the account
+     @param balance The amount to top up the balance by
+     @return null
+     */
+    protected Boolean requestTopUp(int id, double balance ){
         System.out.println("Id: " + id);
         System.out.println("TopUp: " + balance);
         mApiService.topUp(id,balance).enqueue(new Callback<Boolean>() {
@@ -179,7 +234,9 @@ public class AboutMe extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Boolean topUpResult = response.body();
                     System.out.println("TOPUP SUCCESSFUL!!") ;
-                    MainActivity.savedAccount.balance += balance;
+                    //MainActivity.savedAccount.balance += balance;
+
+
                     Toast.makeText(mContext, "Top Up Successful", Toast.LENGTH_SHORT).show();
                     Intent move = new Intent(AboutMe.this, AboutMe.class);
                     startActivity(move);
@@ -197,6 +254,58 @@ public class AboutMe extends AppCompatActivity {
     }
 
 
+    /**
+
+     This method creates the options menu for the activity.
+     @param menu The menu to be created
+     @return true
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    /**
+
+     This method handles the selection of items in the options menu. If the user selects the "home" item, it navigates to the MainActivity.
+     @param item The selected menu item
+     @return true if the item is handled by this method, otherwise calls the superclass method
+     */
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.home:
+                Intent move = new Intent(AboutMe.this, MainActivity.class);
+                startActivity(move);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+
+     This method prepares the options menu by hiding certain items.
+     @param menu The options menu to be prepared
+     @return true
+     */
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem register = menu.findItem(R.id.box_add_icon);
+        MenuItem refresh = menu.findItem(R.id.refresh);
+        MenuItem acc = menu.findItem(R.id.acc_icon);
+        MenuItem box = menu.findItem(R.id.box_add_icon);
+        MenuItem search = menu.findItem(R.id.search_button);
+        search.setVisible(false);
+        register.setVisible(false);
+        refresh.setVisible(false);
+        acc.setVisible(false);
+        box.setVisible(false);
+        return true;
+    }
 
 
 }

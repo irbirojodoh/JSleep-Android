@@ -17,6 +17,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="30">
         <activity
+            android:name=".CheckoutActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".OrderDetailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".PaymentActivity"
             android:exported="false">
             <meta-data
