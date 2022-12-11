@@ -47,6 +47,14 @@ public class CreateRoomActivity extends AppCompatActivity {
     Context mContext;
 
 
+
+    /**
+     * Called when the activity is created.
+     * Initializes the views, sets up the spinners and the onClickListeners for the buttons.
+     *
+     * @param savedInstanceState The saved instance state, containing information about the previous state of the activity.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +136,18 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method to create a room and send it to the backend
+     * @param id
+     * @param name
+     * @param size
+     * @param price
+     * @param facility
+     * @param city
+     * @param address
+     * @param bedType
+     * @return
+     */
     protected Room requestRoom(int id, String name, int size, int price, ArrayList<Facility> facility, City city, String address, BedType bedType) {
         mApiService.room(id, name, size, price, facility, city, address, bedType).enqueue(new Callback<Room>() {
             @Override
@@ -149,12 +169,26 @@ public class CreateRoomActivity extends AppCompatActivity {
         return null;
     }
 
+
+    /**
+     * Creates the options menu.
+     *
+     * @param menu The options menu to be created.
+     * @return true if the menu was successfully created, false otherwise.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
+    /**
+     * Handles the selection of an item from the options menu.
+     *
+     * @param item The selected menu item.
+     * @return true if the selection was handled successfully, false otherwise.
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
@@ -167,6 +201,13 @@ public class CreateRoomActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Prepares the options menu by hiding certain menu items.
+     *
+     * @param menu The options menu in which the items should be hidden.
+     * @return true if the menu was successfully prepared.
+     */
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         MenuItem register = menu.findItem(R.id.box_add_icon);

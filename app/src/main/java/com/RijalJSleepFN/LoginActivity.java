@@ -19,12 +19,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+/**
+ This is the activity class for the login screen.
+ @author Ibrahim Rijal
+ */
+
 public class LoginActivity extends AppCompatActivity {
 
     BaseApiService mApiService;
     EditText username, password;
     Context mContext;
 
+    /**
+     * Method to initialize the activity.
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +90,12 @@ public class LoginActivity extends AppCompatActivity {
 
  */
 
+    /**
+     * Method to send a request to the backend to login.
+     * @param email
+     * @param password
+     * @return
+     */
     protected Account requestLogin(String email, String password){
         mApiService.login(email, password).enqueue(new Callback<Account>() {
             @Override

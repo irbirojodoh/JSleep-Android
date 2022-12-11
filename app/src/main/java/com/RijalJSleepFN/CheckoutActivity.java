@@ -29,6 +29,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * CheckoutActivity is an activity that shows the checkout page.
+ * It shows the room details, the invoice, and the payment method.
+ * It also allows the user to choose the payment method.
+ *
+ * @author Ibrahim Rijal
+ */
 public class CheckoutActivity extends AppCompatActivity {
 
     public static Payment tempPayment;
@@ -44,6 +51,10 @@ public class CheckoutActivity extends AppCompatActivity {
     BaseApiService mApiService;
     Context mContext;
 
+    /**
+     * This method is called when the activity is first created.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -129,7 +140,7 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
 
-        if (tempPayment.status.equals(Invoice.PaymentStatus.SUCCESS)){
+        if (tempPayment.status.equals(Invoice.PaymentStatus.SUCCESS) && !tempPayment.rating.equals(Invoice.RoomRating.NONE)) {
             rating.setVisibility(View.VISIBLE);
             checkout.setVisibility(View.GONE);
             ratingSpinner.setAdapter(new ArrayAdapter<Invoice.RoomRating>(this, android.R.layout.simple_spinner_item, Invoice.RoomRating.values()));
@@ -151,13 +162,11 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
 
-
-
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 requestAccept(tempPayment.id);
-                Intent move3 = new Intent(CheckoutActivity.this, OrderDetailActivity.class);
+                Intent move3 = new Intent(CheckoutActivity.this, OrderListActivity.class);
                 startActivity(move3);
 
             }
@@ -174,6 +183,12 @@ public class CheckoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Makes an API call to get room from the backend
+     *
+     * @param id The id of the room.
+     * @return true if the API call was successful, false otherwise.
+     */
     protected static  Room loadRoom(int id){
         mApiServiceStatic.brumbrum(id).enqueue(new Callback<Room>() {
             @Override
@@ -192,7 +207,12 @@ public class CheckoutActivity extends AppCompatActivity {
         });
         return CheckoutActivity.checkoutRoom;
     }
-
+    /**
+     * Makes an API call to cancel a room order and send the result to the backend
+     *
+     * @param id The id of the payment.
+     * @return true if the API call was successful, false otherwise.
+     */
     protected Boolean requestCancel(int id){
         mApiServiceStatic.cancelPayment(id).enqueue(new Callback<Boolean>() {
             @Override
@@ -212,6 +232,13 @@ public class CheckoutActivity extends AppCompatActivity {
         return true;
     }
 
+
+    /**
+     * Makes an API call to accept a room order and send the result to the backend
+     *
+     * @param id The id of the payment.
+     * @return true if the API call was successful, false otherwise.
+     */
     protected Boolean requestAccept(int id){
         mApiServiceStatic.acceptPayment(id).enqueue(new Callback<Boolean>() {
             @Override
@@ -230,6 +257,14 @@ public class CheckoutActivity extends AppCompatActivity {
         return true;
     }
 
+
+    /**
+     * Makes an API call to rate a room and send the result to the backend
+     *
+     * @param id The id of the room.
+     * @param rating The rating for the payment.
+     * @return true if the API call was successful, false otherwise.
+     */
     protected Boolean requestRating(int id, String rating){
         mApiService.rating(id, rating).enqueue(new Callback<Boolean>() {
             @Override
@@ -248,6 +283,12 @@ public class CheckoutActivity extends AppCompatActivity {
         return true;
     }
 
+
+
+    /**
+     * Shows a dialog asking the user if they want to cancel the order.
+     *
+     */
 
     private void cancelDialog(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -283,8 +324,6 @@ public class CheckoutActivity extends AppCompatActivity {
         // menampilkan alert dialog
         alertDialog.show();
     }
-
-
 
 
 }

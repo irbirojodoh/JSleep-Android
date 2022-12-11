@@ -39,6 +39,10 @@ public class PaymentActivity extends AppCompatActivity {
     EditText fromDate, toDate;
     final String REGEX_DATE_PATTERN = "\\d{4}-\\d{2}-\\d{2}";
 
+    /**
+     * Method to initialize the activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +120,7 @@ public class PaymentActivity extends AppCompatActivity {
 
 
     /**
-     *
+     * Method to display menu
      * @param menu
      * @return
      */

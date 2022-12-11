@@ -25,7 +25,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderDetailActivity extends AppCompatActivity {
+
+/**
+
+ @author Ibrahim Rijal
+ This class is used to display the order list
+ It contains the onCreate method, which is called when the activity is created,
+ as well as the onItemClick method, which is called when an item in the list view is clicked.
+ The getPaymentList method is used to retrieve a list of payments for a given account.
+ */
+public class OrderListActivity extends AppCompatActivity {
 
     Context mContext;
     BaseApiService mApiService;
@@ -38,6 +47,13 @@ public class OrderDetailActivity extends AppCompatActivity {
     public static Room tempRoom = null;
     int currentPage;
 
+
+
+    /**
+     * Called when the activity is created.
+     *
+     * @param savedInstanceState a bundle containing the saved state of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         currentPage= 0;
@@ -95,6 +111,15 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
 
+
+    /**
+
+     Called when an item in the list view is clicked.
+     @param l the list view
+     @param v the view that was clicked
+     @param position the position of the item that was clicked
+     @param id the id of the item that was clicked
+     */
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
         Log.i("HelloListView", "You clicked Item: " + id + " at position:" + position);
         // Then you start a new Activity via Intent
@@ -107,6 +132,15 @@ public class OrderDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    /**
+
+     Retrieves a list of payments for a given account.
+     @param accId the id of the account
+     @param page the page number of the list to retrieve
+     @param pageSize the number of items per page
+     @return a list of payments
+     */
     protected List<Payment> getPaymentList(int accId, int page, int pageSize){
         mApiService.getRoomByRenter(accId,page, pageSize).enqueue(new Callback<List<Payment>>() {
             @Override

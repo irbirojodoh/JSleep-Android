@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     This static method retrieves an account with the given ID from the API and updates the savedAccount field.
+     This static method retrieves an account with the given ID from the API and reloads the MainActivity
      @param id The ID of the account to retrieve
      @return null
      */

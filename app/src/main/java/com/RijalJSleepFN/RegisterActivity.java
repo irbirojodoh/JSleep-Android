@@ -20,6 +20,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+/**
+ This is the activity class for the registration screen.
+ @author Ibrahim Rijal
+ */
+
 public class RegisterActivity extends AppCompatActivity {
 
 
@@ -27,6 +33,11 @@ public class RegisterActivity extends AppCompatActivity {
     EditText name, username, password;
     Context mContext;
 
+
+    /**
+     * Method to initialize the activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +61,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Method to send a request to the backend to register a new account.
+     * @param name
+     * @param email
+     * @param password
+     * @return
+     */
     protected Account requestRegister(String name, String email, String password){
         mApiService.register(name, email, password).enqueue(new Callback<Account>() {
             @Override
@@ -58,10 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(mContext, "Berhasil register", Toast.LENGTH_SHORT).show();
                     Intent move = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(move);
-
                 }
             }
-
             @Override
             public void onFailure(Call<Account> call, Throwable t) {
                 Toast.makeText(mContext, "gagal register", Toast.LENGTH_SHORT).show();

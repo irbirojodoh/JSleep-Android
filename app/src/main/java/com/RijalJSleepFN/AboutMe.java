@@ -154,7 +154,7 @@ public class AboutMe extends AppCompatActivity {
             showBooking.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(AboutMe.this, OrderDetailActivity.class);
+                    Intent intent = new Intent(AboutMe.this, OrderListActivity.class);
                     startActivity(intent);
                 }
             });

@@ -9,12 +9,27 @@ import java.util.Date;
 import java.text.*;
 
 
+/**
+
+ Payment class that extends Invoice and contains information about a payment for a specific room.
+ @author Ibrahim Rijal
+ @version 1.0
+ */
+
 public class Payment extends Invoice{
     public Date to;
     public Date from;
     public int roomId;
 
-    /**overloading constructor*/
+    /**
+     Overloading constructor that creates a Payment object with the given buyer, renter, roomId, and date range.
+     @param buyer the Account of the buyer
+     @param renter the Renter of the room
+     @param roomId the id of the room
+     @param from the starting date of the booking
+     @param to the ending date of the booking
+     */
+
     public Payment(Account buyer, Renter renter, int roomId,Date from,Date to){
         super(buyer,renter);
         this.roomId=roomId;
@@ -23,7 +38,14 @@ public class Payment extends Invoice{
         this.to=to;
         //to.add(Calendar.DATE,2);
     }
-
+    /**
+     Overloading constructor that creates a Payment object with the given buyer id, renter id, roomId, and date range.
+     @param buyerId the id of the buyer
+     @param renterId the id of the renter
+     @param roomId the id of the room
+     @param from the starting date of the booking
+     @param to the ending date of the booking
+     */
     public Payment(int buyerId, int renterId, int roomId,Date from, Date to){
         super(buyerId,renterId);
         this.roomId=roomId;
@@ -31,7 +53,10 @@ public class Payment extends Invoice{
         this.to=to;
         //to.add(Calendar.DATE,2);
     }
-    /**method overriding dengan parent*/
+    /**
+     Overrides the print method in the parent class to return a String containing information about the Payment object.
+     @return a String containing information about the Payment object
+     */
     public String print(){
         String constfrom = "From :";
         SimpleDateFormat arrange = new SimpleDateFormat(" dd/mm/yyyy");
@@ -42,7 +67,11 @@ public class Payment extends Invoice{
         return tmp;
     }
 
-    /** getter*/
+
+    /**
+     * Getter for roomId
+     * @return
+     */
     public int getRoomId(){
         return this.roomId;
     }
@@ -53,6 +82,13 @@ public class Payment extends Invoice{
     //    return currTime;
     // }
 
+    /**
+     * Availibility method that checks if the room is available for the given date range.
+     * @param from
+     * @param to
+     * @param room
+     * @return
+     */
     public static boolean availability(Date from, Date to, Room room){
         //int y;
         Calendar start = Calendar.getInstance();
@@ -70,6 +106,13 @@ public class Payment extends Invoice{
         return true;
     }
 
+    /**
+     * Make booking method that creates a booking for the given date range and room.
+     * @param from
+     * @param to
+     * @param room
+     * @return
+     */
     public static boolean makeBooking(Date from, Date to, Room room){
         if(availability(from, to, room)){
             Calendar start = Calendar.getInstance();

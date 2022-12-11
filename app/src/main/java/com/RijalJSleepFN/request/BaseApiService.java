@@ -11,6 +11,12 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+
+/**
+ * BaseApiService is an interface that defines a set of methods for making HTTP requests
+ * to a remote server and handling the responses.
+ *  @author Ibrahim Rijal
+ */
 public interface BaseApiService {
     @GET("account/{id}")
     Call<Account> getAccount (@Path("id") int id);
