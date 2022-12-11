@@ -7,6 +7,7 @@ import java.util.regex.*;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -193,8 +194,6 @@ public class AboutMe extends AppCompatActivity {
                         System.out.println(m_Text);
                         Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
 
-
-
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -204,16 +203,10 @@ public class AboutMe extends AppCompatActivity {
                     }
                 });
 
-
                 builder.show();
-
-
-
-
-
-                Toast.makeText(getApplicationContext(),
-                                "Authentication error: " + errString, Toast.LENGTH_SHORT)
-                        .show();
+//                Toast.makeText(getApplicationContext(),
+//                                "Authentication error: " + errString, Toast.LENGTH_SHORT)
+//                        .show();
             }
 
             @Override
@@ -221,8 +214,8 @@ public class AboutMe extends AppCompatActivity {
                     @NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
-                Toast.makeText(getApplicationContext(),
-                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),
+//                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -232,12 +225,14 @@ public class AboutMe extends AppCompatActivity {
                                 Toast.LENGTH_SHORT)
                         .show();
             }
+
         });
 
         promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Biometric login for topup")
-                .setSubtitle("Topup using your biometric credential")
+                .setTitle("Biometric identification for topup")
+                .setSubtitle("Verify your fingerprint to topup")
                 .setNegativeButtonText("Use account password")
+               // .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
                 .build();
 
         topupSubmit.setOnClickListener(new View.OnClickListener() {

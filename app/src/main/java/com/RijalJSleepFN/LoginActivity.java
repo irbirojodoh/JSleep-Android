@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,18 @@ public class LoginActivity extends AppCompatActivity {
     BaseApiService mApiService;
     EditText username, password;
     Context mContext;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    SharedPreferences sharedpreferences;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (MainActivity.savedAccount != null) {
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
+        }
+    }
 
     /**
      * Method to initialize the activity.

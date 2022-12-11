@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     Account empty;
 
 
+
+
     /**
      * Initializes the activity.
      *
@@ -84,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("test");
 
         acc = getRoomList(currentPage-1,10);
-
 
 
         next.setOnClickListener(new View.OnClickListener() {
@@ -162,10 +163,10 @@ public class MainActivity extends AppCompatActivity {
                 //Alert dialog
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 // set title dialog
-                alertDialogBuilder.setTitle("Are you sure you want to cancel the order?");
+                alertDialogBuilder.setTitle("Are you sure you want to logout?");
                 // set pesan dari dialog
                 alertDialogBuilder
-                        .setMessage("Press yes to cancel")
+                        .setMessage("Press yes to logout")
                         .setIcon(R.mipmap.ic_launcher)
                         .setCancelable(false)
                         .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
@@ -317,13 +318,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("id", id);
         startActivity(intent);
     }
-
-
-
-
-
-
-
 
 
 
