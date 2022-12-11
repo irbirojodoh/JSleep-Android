@@ -6,93 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <!--
-    <TextView
-        android:id="@+id/registerPrompt"
-        android:layout_width="363dp"
-        android:layout_height="283dp"
-        android:fontFamily="@font/yellowtail"
-        android:gravity="center"
-        android:text=" Welcome to JSleep"
-        android:textAlignment="center"
-        android:textColor="#f4f4f4"
-        android:textSize="70sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-        -->
 
-    <Button
-        android:id="@+id/prevButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:background="@drawable/button_rounded"
-        android:text="PREV"
-        app:layout_constraintBottom_toTopOf="@+id/goButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:background="@drawable/button_rounded"
-        android:text="NEXT"
-        app:layout_constraintBottom_toTopOf="@+id/goButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.807"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/goButton"
-        android:layout_width="289dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button_rounded"
-        android:text="GO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913" />
 
-    <TextView
-        android:id="@+id/pageIndicator"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal">
 
-        android:ems="10"
-        android:fontFamily="@font/red_hat_display"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:text="page"
-        android:textAlignment="center"
-        android:textColor="@color/Honeydew"
-        app:layout_constraintBottom_toTopOf="@+id/goButton"
-        app:layout_constraintEnd_toStartOf="@+id/nextButton"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toEndOf="@+id/prevButton"
+        <TextView
+            android:id="@+id/registerPrompt"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/yellowtail"
+            android:gravity="center"
+            android:text="Rooms"
+            android:textAlignment="center"
+            android:textColor="#f4f4f4"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        app:layout_constraintVertical_bias="0.92" />
+        <ListView
+            android:id="@+id/listViewMain"
+            android:layout_width="346dp"
+            android:layout_height="503dp"
+            android:layout_marginBottom="20dp"
 
-    <ListView
-        android:id="@+id/listViewMain"
-        android:layout_width="346dp"
-        android:layout_height="590dp"
+            android:textColor="@color/Honeydew"
 
-        android:textColor="@color/Honeydew"
+            />
 
-        android:backgroundTint="@color/Honeydew"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.138" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/prevButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/button_rounded"
+                android:text="PREV"
+
+                app:layout_constraintBottom_toTopOf="@+id/goButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.192"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/pageIndicator"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+
+                android:ems="10"
+                android:fontFamily="@font/red_hat_display"
+                android:gravity="center"
+                android:inputType="textPersonName"
+                android:text="page"
+                android:textAlignment="center"
+                android:textColor="@color/Honeydew"
+                app:layout_constraintBottom_toTopOf="@+id/goButton"
+                app:layout_constraintEnd_toStartOf="@+id/nextButton"
+                app:layout_constraintHorizontal_bias="0.483"
+                app:layout_constraintStart_toEndOf="@+id/prevButton"
+
+                app:layout_constraintVertical_bias="0.92" />
+
+            <Button
+                android:id="@+id/nextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded"
+                android:text="NEXT"
+                app:layout_constraintBottom_toTopOf="@+id/goButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.807"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

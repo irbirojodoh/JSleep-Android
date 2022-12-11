@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderDetailActivity">
+    tools:context=".OrderListActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:id="@+id/listViewOrder"
                 android:layout_width="346dp"
                 android:layout_height="500dp"
-                android:backgroundTint="@color/Celadon_Blue"
+
                 android:layout_gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginVertical="20dp"/>

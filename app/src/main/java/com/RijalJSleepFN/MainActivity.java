@@ -6,7 +6,9 @@ import com.RijalJSleepFN.model.*;
 import java.lang.*;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     List<Room> acc ;
     ListView lv;
     BaseApiService mApiService;
+    TextView page;
     static BaseApiService mApiServiceStatic;
     Context mContext = this;
     Button next, prev;
@@ -66,9 +69,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mApiService = UtilsApi.getAPIService();
         mApiServiceStatic = UtilsApi.getAPIService();
+        currentPage = 1;
 
         next = findViewById(R.id.nextButton);
         prev = findViewById(R.id.prevButton);
+        page = findViewById(R.id.pageIndicator);
+        page.setText(Integer.toString(currentPage));
 
 
         lv = findViewById(R.id.listViewMain);
@@ -77,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("test");
 
-        acc = getRoomList(0,10);
+        acc = getRoomList(currentPage-1,10);
 
 
 
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 currentPage++;
                 try {
                     acc = getRoomList(currentPage-1, 1);  //return null
-                    Toast.makeText(mContext, "page "+currentPage, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "page "+currentPage, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -110,8 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 currentPage--;
                 try {
                     acc = getRoomList(currentPage-1, 1);  //return null
-
-                    Toast.makeText(mContext, "page "+currentPage, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "page "+currentPage, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -152,6 +157,39 @@ public class MainActivity extends AppCompatActivity {
             case R.id.refresh:
                 finish();
                 startActivity(getIntent());
+                return true;
+            case  R.id.logout:
+                //Alert dialog
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                // set title dialog
+                alertDialogBuilder.setTitle("Are you sure you want to cancel the order?");
+                // set pesan dari dialog
+                alertDialogBuilder
+                        .setMessage("Press yes to cancel")
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // jika tombol diklik, maka akan menutup activity ini
+                                Intent move = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(move);
+                                 MainActivity.savedAccount = null;
+                                 finish();
+
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                // membuat alert dialog dari builder
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                // menampilkan alert dialog
+                alertDialog.show();
+
+
+                //alert dialog
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -215,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     This static method retrieves an account with the given ID from the API and reloads the MainActivity
+     This static method retrieves an account with the given ID from the API and updates the savedAccount field.
      @param id The ID of the account to retrieve
      @return null
      */

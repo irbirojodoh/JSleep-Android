@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,12 @@ public class LoginActivity extends AppCompatActivity {
         Button login = findViewById(R.id.loginPageLoginButton);
         username = findViewById(R.id.loginEmailInput);
         password = findViewById(R.id.loginPagePassword);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            username.setAutofillHints(View.AUTOFILL_HINT_USERNAME);
+            password.setAutofillHints(View.AUTOFILL_HINT_PASSWORD);
+        }
+
 
 
 
@@ -103,19 +110,17 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Account account = response.body();
                     MainActivity.savedAccount = account;
-                    Toast.makeText(mContext, "Halo gan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Welcome to JSleep, "+ MainActivity.savedAccount.name +".", Toast.LENGTH_SHORT).show();
                     System.out.println(account.toString());
                     Intent move = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(move);
-
-
                 }
             }
 
             @Override
             public void onFailure(Call<Account> call, Throwable t) {
                 System.out.println("sad");
-                Toast.makeText(mContext, "Gagal gan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Failed to login", Toast.LENGTH_SHORT).show();
             }
         });
         return null;

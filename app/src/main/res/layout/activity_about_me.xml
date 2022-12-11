@@ -21,7 +21,7 @@
 
 
     <LinearLayout
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="1300dp"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
@@ -59,7 +59,7 @@
 
 
         <LinearLayout
-            android:layout_width="392dp"
+            android:layout_width="match_parent"
             android:layout_height="67dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="15dp"
@@ -103,7 +103,7 @@
 
 
         <LinearLayout
-            android:layout_width="392dp"
+            android:layout_width="match_parent"
             android:layout_height="67dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="15dp"
@@ -141,7 +141,7 @@
 
 
         <LinearLayout
-            android:layout_width="392dp"
+            android:layout_width="match_parent"
             android:layout_height="67dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="15dp"
@@ -169,6 +169,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:enabled="true"
+                android:layout_marginLeft="11dp"
                 android:layout_gravity="right|center_vertical"
                 android:background="@drawable/button_rounded"
                 android:fontFamily="@font/red_hat_display"
@@ -348,8 +349,8 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cvYesRenter"
             android:layout_width="369dp"
-            android:layout_height="399dp"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             app:cardBackgroundColor="@color/Prussian_Blue"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
@@ -365,16 +366,16 @@
 
 
             <LinearLayout
-                android:layout_width="333dp"
-                android:layout_height="354dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="313dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
+                    android:layout_marginVertical="10dp"
                     android:gravity="center"
-                    android:layout_marginVertical="20dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -384,10 +385,10 @@
                         android:layout_gravity="left"
                         android:fontFamily="@font/red_hat_display"
                         android:gravity="center|left"
-                        android:textStyle="bold"
+                        android:text="Name"
                         android:textColor="@color/Honeydew"
                         android:textSize="20dp"
-                        android:text="Name"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/rtrNameVar"
@@ -408,8 +409,8 @@
                     android:layout_width="313dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
+                    android:layout_marginVertical="10dp"
                     android:gravity="center"
-                    android:layout_marginVertical="20dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -419,10 +420,10 @@
                         android:layout_gravity="left"
                         android:fontFamily="@font/red_hat_display"
                         android:gravity="center|left"
-                        android:textStyle="bold"
+                        android:text="Address"
                         android:textColor="@color/Honeydew"
                         android:textSize="20dp"
-                        android:text="Address"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/rtrAddressVar"
@@ -441,9 +442,9 @@
 
                 <LinearLayout
                     android:layout_width="313dp"
-                    android:layout_height="76dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginVertical="10dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -454,10 +455,10 @@
                         android:layout_gravity="left"
                         android:fontFamily="@font/red_hat_display"
                         android:gravity="center|left"
+                        android:text="Phone"
                         android:textColor="@color/Honeydew"
                         android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:text="Phone" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/rtrPhoneVar"
@@ -474,21 +475,23 @@
 
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/showBookings"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                   android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+
+                    android:background="@drawable/button_rounded"
+                    android:fontFamily="@font/red_hat_display"
+                    android:text="My Bookings">
+
+                </Button>
+
 
             </LinearLayout>
 
-
-            <Button
-                android:id="@+id/showBookings"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:background="@drawable/button_rounded"
-                android:layout_marginBottom="20dp"
-                android:text="My Bookings"
-                android:fontFamily="@font/red_hat_display">
-
-            </Button>
         </androidx.cardview.widget.CardView>
 
 

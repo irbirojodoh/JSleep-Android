@@ -8,6 +8,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.RijalJSleepFN.model.BedType;
 import com.RijalJSleepFN.model.Facility;
 import com.RijalJSleepFN.model.Invoice;
 import com.RijalJSleepFN.model.Payment;
@@ -42,7 +44,7 @@ public class CheckoutActivity extends AppCompatActivity {
     public static Room checkoutRoom = null;
     TextView roomName, roomPrice, roomSize, roomAddress, roomBedtype, fromDate, toDate, totalPayment, status, rateText;
     CheckBox ac, refrig, wifi, bathub, balcony, restaurant, pool, fitness;
-    Button order, cancel, rate;
+    Button chckoutBtn, cancel, rate;
     static BaseApiService mApiServiceStatic;
     LinearLayout checkout, ratingView;
     CardView rating;
@@ -76,7 +78,7 @@ public class CheckoutActivity extends AppCompatActivity {
         restaurant = findViewById(R.id.restaurantCheckout);
         pool = findViewById(R.id.poolCheckout);
         fitness = findViewById(R.id.fitnessCheckout);
-        order = findViewById(R.id.checkout);
+        chckoutBtn = findViewById(R.id.checkout);
         cancel = findViewById(R.id.cancelCheckout);
         fromDate = findViewById(R.id.fromDateCheckout);
         toDate = findViewById(R.id.toDateCheckout);
@@ -91,7 +93,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
         if(!tempPayment.status.equals(Invoice.PaymentStatus.WAITING)){
-            order.setVisibility(View.GONE);
+            chckoutBtn.setVisibility(View.GONE);
             cancel.setVisibility(View.GONE);
         }
         if(tempPayment.rating.equals(Invoice.RoomRating.NONE)) {
@@ -137,6 +139,7 @@ public class CheckoutActivity extends AppCompatActivity {
             System.out.println("data isnt loaded");
             Intent move3 = new Intent(CheckoutActivity.this, CheckoutActivity.class);
             startActivity(move3);
+            finish();
         }
 
 
@@ -153,6 +156,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     String rateStr = ratingSpinner.getSelectedItem().toString();
                     System.out.println(rateStr);
                     requestRating(tempPayment.id, rateStr);
+                    retrievePayment(tempPayment.id);
                     finish();
                     startActivity(getIntent());
 
@@ -162,12 +166,13 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
 
-        order.setOnClickListener(new View.OnClickListener() {
+        chckoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 requestAccept(tempPayment.id);
-                Intent move3 = new Intent(CheckoutActivity.this, OrderListActivity.class);
-                startActivity(move3);
+                retrievePayment(tempPayment.id);
+                finish();
+                startActivity(getIntent());
 
             }
         });
@@ -190,7 +195,7 @@ public class CheckoutActivity extends AppCompatActivity {
      * @return true if the API call was successful, false otherwise.
      */
     protected static  Room loadRoom(int id){
-        mApiServiceStatic.brumbrum(id).enqueue(new Callback<Room>() {
+        mApiServiceStatic.getRoom(id).enqueue(new Callback<Room>() {
             @Override
             public void onResponse(Call<Room> call, Response<Room> response) {
                 if (response.isSuccessful()) {
@@ -292,10 +297,8 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private void cancelDialog(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
         // set title dialog
         alertDialogBuilder.setTitle("Are you sure you want to cancel the order?");
-
         // set pesan dari dialog
         alertDialogBuilder
                 .setMessage("Press yes to cancel")
@@ -305,10 +308,9 @@ public class CheckoutActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,int id) {
                         // jika tombol diklik, maka akan menutup activity ini
                         requestCancel(tempPayment.id);
-                        Intent move = new Intent(CheckoutActivity.this, AboutMe.class);
-                        startActivity(move);
-
-
+                        retrievePayment(tempPayment.id);
+                        finish();
+                        startActivity(getIntent());
                     }
                 })
                 .setNegativeButton("No",new DialogInterface.OnClickListener() {
@@ -323,6 +325,73 @@ public class CheckoutActivity extends AppCompatActivity {
 
         // menampilkan alert dialog
         alertDialog.show();
+    }
+
+    protected Payment retrievePayment(int id){
+        mApiServiceStatic.getPayment(id).enqueue(new Callback<Payment>() {
+            @Override
+            public void onResponse(Call<Payment> call, Response<Payment> response) {
+                if (response.isSuccessful()) {
+                    tempPayment = response.body();
+                    System.out.println("Payment loaded");
+                    //Toast.makeText(mContext, "getAccount success", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Payment> call, Throwable t) {
+                t.printStackTrace();
+                //Toast.makeText(mContext, "get account failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return tempPayment;
+    }
+
+    /**
+     * Method to display menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    /**
+     This method is called when a menu item is selected.
+     @param item the selected menu item
+     @return true if the menu item was handled successfully, false otherwise
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.home:
+                Intent move = new Intent(CheckoutActivity.this, MainActivity.class);
+                startActivity(move);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    /**
+     This method is called to prepare the options menu.
+     @param menu the options menu to prepare
+     @return true if the menu was prepared successfully, false otherwise
+     */
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem register = menu.findItem(R.id.box_add_icon);
+        MenuItem refresh = menu.findItem(R.id.refresh);
+        MenuItem acc = menu.findItem(R.id.acc_icon);
+        MenuItem box = menu.findItem(R.id.box_add_icon);
+        MenuItem logout = menu.findItem(R.id.logout);
+        logout.setVisible(false);
+        register.setVisible(false);
+        refresh.setVisible(false);
+        acc.setVisible(false);
+        box.setVisible(false);
+        return true;
     }
 
 

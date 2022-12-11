@@ -22,7 +22,10 @@ public interface BaseApiService {
     Call<Account> getAccount (@Path("id") int id);
 
     @GET("room/{id}")
-    Call<Room> brumbrum (@Path("id") int id);
+    Call<Room> getRoom(@Path("id") int id);
+
+    @GET("payment/{id}")
+    Call<Payment> getPayment (@Path("id") int id);
 
     @POST("account/login")
     Call<Account> login(@Query("email") String email, @Query("password") String password);

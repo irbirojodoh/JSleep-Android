@@ -195,6 +195,7 @@ public class CreateRoomActivity extends AppCompatActivity {
             case R.id.home:
                 Intent move = new Intent(CreateRoomActivity.this, MainActivity.class);
                 startActivity(move);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -214,8 +215,8 @@ public class CreateRoomActivity extends AppCompatActivity {
         MenuItem refresh = menu.findItem(R.id.refresh);
         MenuItem acc = menu.findItem(R.id.acc_icon);
         MenuItem box = menu.findItem(R.id.box_add_icon);
-        MenuItem search = menu.findItem(R.id.search_button);
-        search.setVisible(false);
+        MenuItem logout = menu.findItem(R.id.logout);
+        logout.setVisible(false);
         register.setVisible(false);
         refresh.setVisible(false);
         acc.setVisible(false);

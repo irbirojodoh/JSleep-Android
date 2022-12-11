@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -172,7 +175,7 @@ public class OrderListActivity extends AppCompatActivity {
 
     protected static  Room loadRoom(int id){
         Room test;
-        mApiServiceStatic.brumbrum(id).enqueue(new Callback<Room>() {
+        mApiServiceStatic.getRoom(id).enqueue(new Callback<Room>() {
             @Override
             public void onResponse(Call<Room> call, Response<Room> response) {
                 if (response.isSuccessful()) {
@@ -202,6 +205,54 @@ public class OrderListActivity extends AppCompatActivity {
             }
 
         return ret;
+    }
+
+    /**
+     * Method to display menu
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    /**
+     This method is called when a menu item is selected.
+     @param item the selected menu item
+     @return true if the menu item was handled successfully, false otherwise
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.home:
+                Intent move = new Intent(OrderListActivity.this, MainActivity.class);
+                startActivity(move);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    /**
+     This method is called to prepare the options menu.
+     @param menu the options menu to prepare
+     @return true if the menu was prepared successfully, false otherwise
+     */
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem register = menu.findItem(R.id.box_add_icon);
+        MenuItem refresh = menu.findItem(R.id.refresh);
+        MenuItem acc = menu.findItem(R.id.acc_icon);
+        MenuItem box = menu.findItem(R.id.box_add_icon);
+        MenuItem logout = menu.findItem(R.id.logout);
+        logout.setVisible(false);
+        register.setVisible(false);
+        refresh.setVisible(false);
+        acc.setVisible(false);
+        box.setVisible(false);
+        return true;
     }
 
 

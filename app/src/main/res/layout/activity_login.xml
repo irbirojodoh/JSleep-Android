@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.191"
-        app:drawableStartCompat="@mipmap/ic_launcher" />
+        app:drawableStartCompat="@mipmap/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/loginText"
@@ -63,7 +63,7 @@
         android:id="@+id/loginEmailInput"
         android:layout_width="314dp"
         android:layout_height="48dp"
-        android:autofillHints=""
+        android:autofillHints="emailAddress"
         android:backgroundTint="#F4F4F4"
         android:ems="10"
         android:fontFamily="@font/red_hat_display"
@@ -83,7 +83,7 @@
         android:id="@+id/loginPagePassword"
         android:layout_width="314dp"
         android:layout_height="48dp"
-        android:autofillHints=""
+        android:autofillHints="password"
         android:backgroundTint="#F4F4F4"
         android:ems="10"
         android:fontFamily="@font/red_hat_display"

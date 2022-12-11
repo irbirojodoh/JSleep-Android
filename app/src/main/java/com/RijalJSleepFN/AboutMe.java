@@ -1,14 +1,22 @@
 package com.RijalJSleepFN;
 
 import static java.lang.String.*;
+
+import java.util.concurrent.Executor;
 import java.util.regex.*;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.RijalJSleepFN.model.Account;
+import com.RijalJSleepFN.model.Payment;
 import com.RijalJSleepFN.model.Renter;
 import com.RijalJSleepFN.request.BaseApiService;
 import com.RijalJSleepFN.request.UtilsApi;
@@ -43,6 +52,11 @@ public class AboutMe extends AppCompatActivity {
     TextView renterNameText, renterAddressText, renterPhoneText, renterNameVar, renterAddressVar, renterPhoneVar;
     Context mContext;
     BaseApiService mApiService;
+    private String m_Text;
+    private Executor executor;
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
+    double finalValue;
 
     String regex = "^.+$";
 
@@ -160,6 +174,72 @@ public class AboutMe extends AppCompatActivity {
             });
         }
 
+        executor = ContextCompat.getMainExecutor(this);
+        biometricPrompt = new BiometricPrompt(AboutMe.this,
+                executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode,
+                                              @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AboutMe.this);
+                builder.setTitle("Enter password");
+                final EditText input = new EditText(AboutMe.this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                builder.setView(input);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        m_Text = input.getText().toString();
+                        System.out.println(m_Text);
+                        Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
+
+
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+
+                builder.show();
+
+
+
+
+
+                Toast.makeText(getApplicationContext(),
+                                "Authentication error: " + errString, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(
+                    @NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
+                Toast.makeText(getApplicationContext(),
+                        "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(getApplicationContext(), "Authentication failed",
+                                Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login for topup")
+                .setSubtitle("Topup using your biometric credential")
+                .setNegativeButtonText("Use account password")
+                .build();
+
         topupSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,11 +249,11 @@ public class AboutMe extends AppCompatActivity {
                     Toast.makeText(mContext, "Enter top-up amount", Toast.LENGTH_SHORT).show();
                 } else{
                     Double topupVal = new Double(topupInput.getText().toString());
-                    double finalValue = topupVal.doubleValue();
+                    finalValue = topupVal.doubleValue();
                     if (finalValue < 10000) {
                         Toast.makeText(mContext, "Minimum top-up amount is Rp. 10.000", Toast.LENGTH_SHORT).show();
                     } else {
-                        Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
+                        biometricPrompt.authenticate(promptInfo);
                     }
 
                 }
@@ -235,8 +315,7 @@ public class AboutMe extends AppCompatActivity {
                     Boolean topUpResult = response.body();
                     System.out.println("TOPUP SUCCESSFUL!!") ;
                     //MainActivity.savedAccount.balance += balance;
-
-
+                    MainActivity.savedAccount.balance = MainActivity.savedAccount.balance + balance;
                     Toast.makeText(mContext, "Top Up Successful", Toast.LENGTH_SHORT).show();
                     Intent move = new Intent(AboutMe.this, AboutMe.class);
                     startActivity(move);
@@ -280,6 +359,7 @@ public class AboutMe extends AppCompatActivity {
             case R.id.home:
                 Intent move = new Intent(AboutMe.this, MainActivity.class);
                 startActivity(move);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -298,13 +378,36 @@ public class AboutMe extends AppCompatActivity {
         MenuItem refresh = menu.findItem(R.id.refresh);
         MenuItem acc = menu.findItem(R.id.acc_icon);
         MenuItem box = menu.findItem(R.id.box_add_icon);
-        MenuItem search = menu.findItem(R.id.search_button);
+        MenuItem search = menu.findItem(R.id.logout);
         search.setVisible(false);
         register.setVisible(false);
         refresh.setVisible(false);
         acc.setVisible(false);
         box.setVisible(false);
         return true;
+    }
+
+
+    protected Account requestLogin(String email, String password){
+        mApiService.login(email, password).enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, Response<Account> response) {
+                if(response.isSuccessful()){
+                    //temp = response.body();
+
+                    Toast.makeText(mContext, "Authentication success", Toast.LENGTH_SHORT).show();
+                    Boolean topup2 = requestTopUp(MainActivity.savedAccount.id, finalValue);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                System.out.println("sad");
+                Toast.makeText(mContext, "Failed to authenticate", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return null;
     }
 
 
